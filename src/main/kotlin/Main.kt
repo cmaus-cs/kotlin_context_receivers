@@ -21,10 +21,10 @@ fun main(args: Array<String>) {
         override fun reportNumberOfItems(query: ItemsStockQuery): ItemsStock = ItemsStock(mapOf())
     }
 
-    with(console) {
-        with(repo) {
-            doProcessOrder(order)
-        }
+    val context = object : WarehouseRepository by repo, Console by console {}
+
+    with(context) {
+        doProcessOrder(order)
     }
 }
 
